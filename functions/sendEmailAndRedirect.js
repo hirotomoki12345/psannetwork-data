@@ -6,10 +6,10 @@ exports.handler = async (event, context) => {
 
     // メール送信処理
     const transporter = nodemailer.createTransport({
-      service: 'YourEmailServiceProvider', // 例: Gmailの場合 'gmail'
+      service: 'gmail', // 例: Gmailの場合 'gmail'
       auth: {
-        user: 'your@email.com',
-        pass: 'your-password',
+        user: 'hiroto20080208@email.com',
+        pass: 'kokugakuin-2',
       },
     });
 
