@@ -1,3 +1,2 @@
 [build]
-  functions = "functions"
-  publish = "."  # プロジェクトのルートディレクトリを公開対象にする
+functions = "functions"
