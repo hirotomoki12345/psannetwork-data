@@ -1,72 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>URL Redirection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        #urlInput {
-            width: 100%;
-            padding: 10px;
-        }
-        #submitBtn {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>文字起こしサイト</title>
 </head>
 <body>
-    <h1>URL Redirection</h1>
-    <form id="urlForm">
-        <label for="urlInput">Enter URL:</label>
-        <input type="text" id="urlInput" required>
-        <button type="submit" id="submitBtn">Generate and Submit</button>
-    </form>
-    <p id="result" style="display: none;"></p>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById("urlForm");
-            const urlInput = document.getElementById("urlInput");
-            const submitBtn = document.getElementById("submitBtn");
-            const result = document.getElementById("result");
-
-            form.addEventListener("submit", async function(event) {
-                event.preventDefault();
-
-                const url = urlInput.value;
-
-                // Generate a random number for organization
-                const organizationNumber = Math.floor(Math.random() * 1000);
-
-                // Send data to the backend (replace with actual API endpoint)
-                const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        url,
-                        organizationNumber
-                    })
-                });
-
-                if (response.ok) {
-                    const responseData = await response.json();
-                    result.textContent = "Generated URLs: " + responseData.siteUrl + " and " + responseData.locationUrl;
-                    result.style.display = "block";
-                } else {
-                    result.textContent = "Error generating URLs.";
-                    result.style.display = "block";
-                }
-            });
-        });
-    </script>
+  <h1>音声ファイルの文字起こし</h1>
+  <input type="file" accept="audio/*" id="audioInput">
+  <button id="transcribeButton">文字起こし</button>
+  <div id="transcriptionResult"></div>
+  <script src="script.js"></script>
 </body>
 </html>
