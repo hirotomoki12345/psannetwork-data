@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Location</title>
+    <title>URL Redirection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #urlInput {
+            width: 100%;
+            padding: 10px;
+        }
+        #submitBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>Enter</h1>
-  <form id="locationForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-    <label for="redirectUrl">Redirect URL:</label>
-    <input type="url" id="redirectUrl" name="redirectUrl" required><br><br>
-    <button type="submit">Submit</button>
-  </form>
+    <h1>URL Redirection</h1>
+    <form id="urlForm">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" required>
+        <button type="submit" id="submitBtn">Generate and Submit</button>
+    </form>
+    <p id="result" style="display: none;"></p>
 
-  <script>
-    document.getElementById('locationForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const redirectUrl = document.getElementById('redirectUrl').value;
-      
-      // バックエンドへのリクエスト
-      const response = await fetch('/functions/sendEmailAndRedirect', {
-        method: 'POST',
-        body: JSON.stringify({ email, redirectUrl }),
-      });
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("urlForm");
+            const urlInput = document.getElementById("urlInput");
+            const submitBtn = document.getElementById("submitBtn");
+            const result = document.getElementById("result");
 
-      if (response.ok) {
-        const data = await response.json();
-        alert(`Location information sent to ${email}. Visit ${data.fileUrl}`);
-      } else {
-        alert('An error occurred. Please try again.');
-      }
-    });
-  </script>
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault();
+
+                const url = urlInput.value;
+
+                // Generate a random number for organization
+                const organizationNumber = Math.floor(Math.random() * 1000);
+
+                // Send data to the backend (replace with actual API endpoint)
+                const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        url,
+                        organizationNumber
+                    })
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    result.textContent = "Generated URLs: " + responseData.siteUrl + " and " + responseData.locationUrl;
+                    result.style.display = "block";
+                } else {
+                    result.textContent = "Error generating URLs.";
+                    result.style.display = "block";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
