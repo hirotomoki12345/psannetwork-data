@@ -21,7 +21,7 @@
       const redirectUrl = document.getElementById('redirectUrl').value;
       
       // バックエンドへのリクエスト
-      const response = await fetch('/.netlify/functions/sendEmailAndRedirect', {
+      const response = await fetch('/functions/sendEmailAndRedirect', {
         method: 'POST',
         body: JSON.stringify({ email, redirectUrl }),
       });
